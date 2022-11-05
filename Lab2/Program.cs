@@ -1,4 +1,7 @@
-﻿namespace Lab2;
+﻿using System.Linq;
+using System.Linq.Expressions;
+
+namespace Lab2;
 public class Program
 {
     public static void Main(string[] args)
@@ -12,7 +15,7 @@ public class Program
         Stack<char> stack = new Stack<char>();
 
         // iterate over all chars in string
-        foreach(var c in s)
+        foreach(char c in s)
         {
             // if char is an open thing, push it
             if ( c=='<' || c=='(' || c == '{' || c == '[')
@@ -38,9 +41,19 @@ public class Program
                 {
                     return false;
                 }
+                
+            }
+            else
+            {
+                continue;
             }
             
+
+           
+
+            
         }
+        
 
         // if stack is empty, return true
         if( stack.Count ==0)
@@ -54,24 +67,44 @@ public class Program
 
     private static bool Matches(char closing, char opening)
     {
-        throw new NotImplementedException();
+        if (closing == '(' && opening == ')')
+            return true;
+        else if (closing == '{' && opening == '}')
+            return true;
+        else if (closing == '[' && opening == ']')
+            return true;
+        else
+            return false;
     }
 
 
     public static double? Evaluate(string s)
     {
+        Stack<char> stack = new Stack<char>();
+
         // parse string into tokens
         string[] tokens = s.Split();
 
-        // foreach token
-        // if it's a number, push to stack
+        for (int i = 0; i < tokens.Length; i++)
 
-        // if it's a math operator, pop twice;
-        // compute result;
-        // push result onto stack
+            // foreach token
+            // if it's a number, push to stack
+        foreach (var c in s) {
+                if (tokens.Contains(s))
+                {
+                    tokens.Append(s);
+                }
 
-        // return top of stack (if the stack has 1 element)
+                // if it's a math operator, pop twice;
+                else if (c == '+' || c == '-' || c == '*' || c == '/');
 
+
+
+                // compute result;
+                // push result onto stack
+
+                    // return top of stack (if the stack has 1 element)
+        }
         return null;
     }
 
