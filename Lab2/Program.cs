@@ -67,11 +67,11 @@ public class Program
 
     private static bool Matches(char closing, char opening)
     {
-        if (closing == '(' && opening == ')')
+        if (opening == '(' && closing == ')')
             return true;
-        else if (closing == '{' && opening == '}')
+        else if (opening == '{' && closing == '}')
             return true;
-        else if (closing == '[' && opening == ']')
+        else if (opening == '[' && closing == ']')
             return true;
         else
             return false;
@@ -102,8 +102,11 @@ public class Program
 
                 // compute result;
                 // push result onto stack
+                char top;
+                bool result = stack.TryPeek(out top);
 
-                    // return top of stack (if the stack has 1 element)
+                // return top of stack (if the stack has 1 element)
+                return top;
         }
         return null;
     }
