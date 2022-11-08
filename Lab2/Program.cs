@@ -43,14 +43,6 @@ public class Program
                 }
                 
             }
-            else
-            {
-                continue;
-            }
-            
-
-           
-
             
         }
         
@@ -80,36 +72,76 @@ public class Program
 
     public static double? Evaluate(string s)
     {
-        Stack<char> stack = new Stack<char>();
-
+        //return null if empty else run
+        if (string.IsNullOrEmpty(s))
+        {
+            return null;
+        }
+        // new stack as a double
+        var stack = new Stack<double>();
         // parse string into tokens
         string[] tokens = s.Split();
+        // foreach token
+        foreach (var c in tokens)
+        {
+            //switch: if var c is found in a case below, run case. If its an operator pop twice, return result,then break.
+            // else goes to default and pushes the var c (integer) as a double.
+            // after all variables have gone through: peek and return that variable
+            //switches and cases explanations found from microsoft.learn W3schools and geeks4geeks
 
-        for (int i = 0; i < tokens.Length; i++)
+            switch (c)
+            {
+                
+                case "+":
+                    //pop 2* if its an operator
+                    var plus1 = stack.Pop();
+                    var plus2 = stack.Pop();
+                    // find the result
+                    var resultplus = plus1 + plus2;
+                    //push it
+                    stack.Push(resultplus);
+                    break;
+                    
+                case "-":
+                    var min1 = stack.Pop();
+                    var min2 = stack.Pop();
 
-            // foreach token
-            // if it's a number, push to stack
-        foreach (var c in s) {
-                if (tokens.Contains(s))
-                {
-                    tokens.Append(s);
-                }
+                    var resultmin = min2 - min1;
+                    stack.Push(resultmin);
+                    break;
+                case "*":
+                    var multi1 = stack.Pop();
+                    var multi2 = stack.Pop();
 
-                // if it's a math operator, pop twice;
-                else if (c == '+' || c == '-' || c == '*' || c == '/');
+                    var resultmulti = multi1 * multi2;
+                    stack.Push(resultmulti);
+                    break;
+                case "/":
+                    var div1 = stack.Pop();
+                    var div2 = stack.Pop();
 
-
-
-                // compute result;
-                // push result onto stack
-                char top;
-                bool result = stack.TryPeek(out top);
-
-                // return top of stack (if the stack has 1 element)
-                return top;
+                    var resultdiv = div2 / div1;
+                    stack.Push(resultdiv);
+                    break;
+                    // if its a number just push
+                default:
+                    stack.Push(double.Parse(c));
+                    break;
+            }
         }
-        return null;
+        //return stack
+        return stack.Peek();
     }
 
+
+
+
+
+    
+
 }
+       
+    
+
+
 
