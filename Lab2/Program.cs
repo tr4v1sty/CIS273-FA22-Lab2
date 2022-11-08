@@ -8,6 +8,7 @@ public class Program
     {
         IsBalanced("{ ( < > ) }");  // true
         IsBalanced("<> {(})");      // false
+        IsBalanced("List<int> list = new List<int>();"); //should be true
     }
 
     public static bool IsBalanced(string s)
@@ -17,8 +18,10 @@ public class Program
         // iterate over all chars in string
         foreach(char c in s)
         {
+
+
             // if char is an open thing, push it
-            if ( c=='<' || c=='(' || c == '{' || c == '[')
+            if (c == '<' || c == '(' || c == '{' || c == '[')
             {
                 stack.Push(c);
             }
@@ -32,7 +35,7 @@ public class Program
                 // handle result == false
 
                 // if they match, pop()
-                if (Matches(c, top) ) 
+                if (Matches(c, top))
                 {
                     stack.Pop();
                 }
@@ -41,27 +44,28 @@ public class Program
                 {
                     return false;
                 }
-                
+
             }
             
         }
         
 
         // if stack is empty, return true
-        if( stack.Count ==0)
+        if( stack.Count == 0)
         {
             return true;
         }
-
         return false;
 
     }
-
+    // im an idiot i forgot < and >
     private static bool Matches(char closing, char opening)
     {
         if (opening == '(' && closing == ')')
             return true;
         else if (opening == '{' && closing == '}')
+            return true;
+        else if (opening == '<' && closing == '>')
             return true;
         else if (opening == '[' && closing == ']')
             return true;
